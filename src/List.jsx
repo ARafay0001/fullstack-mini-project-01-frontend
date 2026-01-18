@@ -1,15 +1,24 @@
-import React from 'react'
+import React from "react";
 
-const List = () => {
-    fetch('http://localhost:5000/gettasks', {
-      method: 'GET',
-    }).then(res => res.json()).then(data => {
-      console.log(data);
-    })
+const List = ({ tasks, onDelete }) => {
   return (
-    <div className='mt-12' id='list'>
-      
+    <div className="w-75 m-auto mt-3 p-3 bg-amber-200">
+      {tasks.map((task, index) => (
+        <div
+          key={task.id}
+          className="bg-amber-50 mb-2 p-2 flex justify-between"
+        >
+          <p>{index + 1}. {task.title}</p>
+          <button
+            onClick={() => onDelete(task.id)}
+            className="bg-red-400 px-3 text-white font-bold"
+          >
+            del
+          </button>
+        </div>
+      ))}
     </div>
-  )
-}
-export default List
+  );
+};
+
+export default List;
