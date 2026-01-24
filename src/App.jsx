@@ -1,32 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
 import Panel from "./Panel";
 import List from "./List";
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
 
-  // Fetch tasks on load
+  const {tasks, setTasks} = useState([])
   useEffect(() => {
-    fetch("http://localhost:5000/api/tasks")
-      .then(res => res.json())
-      .then(data => setTasks(data.data))
-      .catch(err => console.error(err));
-  }, []);
-
-  // Delete task
-  const deleteTask = (id) => {
-    fetch(`http://localhost:5000/api/tasks/${id}`, {
-      method: "DELETE",
-    })
-      .then(res => res.json())
-      .then(data => setTasks(data.data))
-      .catch(err => console.error(err));
-  };
-
+    fetch("http://localhost:5000/tasks")
+      .then((res) => res.json())
+      .then((data) => setTasks(data))
+      .then((data) => console.log(data));
+  } , []);
   return (
     <div>
-      <Panel onAdd={setTasks} />
-      <List tasks={tasks} onDelete={deleteTask} />
+      <Panel />
+      <List tasks={tasks} />
     </div>
   );
 };

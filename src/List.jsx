@@ -1,6 +1,6 @@
 import React from "react";
 
-const List = ({ tasks, onDelete }) => {
+const List = ({tasks}) => {
   return (
     <div className="w-75 m-auto mt-3 p-3 bg-amber-200">
       {tasks.map((task, index) => (
@@ -10,7 +10,7 @@ const List = ({ tasks, onDelete }) => {
         >
           <p>{index + 1}. {task.title}</p>
           <button
-            onClick={() => onDelete(task.id)}
+           
             className="bg-red-400 px-3 text-white font-bold"
           >
             del

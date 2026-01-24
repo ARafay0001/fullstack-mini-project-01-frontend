@@ -1,39 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
+// import { useState } from "react";
 
-const Panel = ({ onAdd }) => {
-  // State to store input value
-  const [task, setTask] = useState("");
-
-  // Handle form submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Send POST request to backend
-    fetch("http://localhost:5000/api/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title: task }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        // Update parent component state
-        onAdd(data.data);
-        setTask(""); // clear input
-      })
-      .catch(err => console.error(err));
-  };
+const Panel = () => {
+  //
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form >
       <div className="min-w-96 bg-amber-100 p-3 flex justify-center items-center">
         <input
           className="bg-amber-50 h-8 rounded-lg pl-3"
           type="text"
           placeholder="Add task here"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
+          // value={task}
+          
           required
         />
         <button
