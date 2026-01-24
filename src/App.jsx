@@ -5,17 +5,22 @@ import List from "./List";
 
 const App = () => {
 
-  const {tasks, setTasks} = useState([])
-  useEffect(() => {
-    fetch("http://localhost:5000/tasks")
+  const [tasks, setTasks] = useState([])
+
+  function fetchTasks() {
+     fetch("http://localhost:5000/api/tasks")
       .then((res) => res.json())
-      .then((data) => setTasks(data))
-      .then((data) => console.log(data));
+      .then((data) => {console.log(data.data);
+        setTasks(data.data)})
+  }
+
+  useEffect(() => {
+    fetchTasks()
   } , []);
   return (
     <div>
-      <Panel />
-      <List tasks={tasks} />
+      <Panel func={fetchTasks} />
+      <List tasks={tasks} func={fetchTasks} />
     </div>
   );
 };

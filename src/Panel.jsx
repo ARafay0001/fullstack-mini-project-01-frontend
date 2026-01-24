@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 // import { useState } from "react";
 
-const Panel = () => {
-  //
-
+const Panel = ({func}) => {
+  const input =  useRef()
+  
+  function handleAddTask(event) {
+    event.preventDefault();
+    const task = input.current.value
+    fetch("http://localhost:5000/api/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: task }),
+    }).then(() =>(func()))
+    
+  }
   return (
-    <form >
+    <form onSubmit={handleAddTask}>
       <div className="min-w-96 bg-amber-100 p-3 flex justify-center items-center">
         <input
+          ref={input}
           className="bg-amber-50 h-8 rounded-lg pl-3"
           type="text"
           placeholder="Add task here"
-          // value={task}
+         
           
           required
         />
